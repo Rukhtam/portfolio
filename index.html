@@ -240,6 +240,9 @@
       font-size: 44px;
       color: var(--text);
       line-height: 1;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .hero-stat-label {
@@ -848,6 +851,10 @@
       color: var(--text);
       line-height: 1;
       margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     .stat-unit {
@@ -1992,7 +1999,7 @@
         this._fBot.style.cssText = `transform:${P}rotateX(90deg)`;
       }
 
-      flipTo(next, dur = 160) {
+      flipTo(next, dur = 85) {
         if (this._busy) return Promise.resolve();
         this._busy = true;
         const prev = this.current;
@@ -2064,9 +2071,9 @@
         this._run = true;
         this.reset();
 
-        const FLIP    = 160;  // ms per phase (fold + unfold)
-        const GAP     = 22;   // ms pause between consecutive flips on same digit
-        const STAGGER = 65;   // ms offset per column (left→right cascade)
+        const FLIP    = 85;   // ms per phase — snappy mechanical feel
+        const GAP     = 8;    // ms breath between successive flips on same digit
+        const STAGGER = 40;   // ms column cascade (left→right)
 
         const targetStr = String(this.target).padStart(this.nDigits, '0');
 
