@@ -263,85 +263,80 @@
        Hacker Energy × Airport board aesthetic
        ============================================================ */
 
-    /* The counter span becomes the row of digit panels */
+    /* Counter span = flex row of digit panels */
     .counter {
       display: inline-flex;
-      gap: 3px;
-      vertical-align: middle;
-      filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.7));
+      gap: 4px;
+      vertical-align: bottom;
+      line-height: 0;               /* prevent line-box from interfering */
+      filter: drop-shadow(0 4px 18px rgba(0,0,0,0.75));
     }
 
-    /* Individual digit cell */
+    /* Individual digit cell — dimensions set by JS */
     .flip-digit {
       position: relative;
-      width: 0.68em;
-      min-width: 26px;
-      height: 1.26em;
-      perspective: 300px;
+      overflow: hidden;             /* clips the half-panels cleanly */
+      border-radius: 4px;
+      flex-shrink: 0;
     }
 
-    /* Chrome hinge divider at midpoint */
+    /* Chrome hinge line at midpoint */
     .flip-digit::after {
       content: '';
       position: absolute;
       left: 0; right: 0;
       top: calc(50% - 1px);
       height: 2px;
-      background: #04040A;
+      background: #03030A;
       z-index: 30;
       pointer-events: none;
     }
 
-    /* Static background halves — always visible */
+    /* Static half-panels — always behind the flaps */
     .fp-half {
       position: absolute;
       left: 0; right: 0;
       height: 50%;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
     }
 
     .fp-half-top {
       top: 0;
+      /* ↓ flex-start: item aligns to top → overflow clips bottom → shows TOP half of digit */
+      align-items: flex-start;
       background: #1E1E2A;
-      border-radius: 3px 3px 0 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      border-radius: 4px 4px 0 0;
     }
     .fp-half-top::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.055) 0%, transparent 100%);
-      border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+      border-radius: 4px 4px 0 0;
       pointer-events: none;
     }
 
     .fp-half-bottom {
       bottom: 0;
-      background: #161620;
-      border-radius: 0 0 3px 3px;
-      display: flex;
+      /* ↓ flex-start + negative margin-top on char → char shifts UP → clipped bottom half visible */
       align-items: flex-start;
-      justify-content: center;
+      background: #161621;
+      border-radius: 0 0 4px 4px;
     }
 
-    /* Digit characters — inherit font from parent stat element */
+    /* Digit chars — font-size and line-height set inline by JS */
     .fp-char {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: inherit;
-      line-height: 1.26em;   /* matches panel total height */
       color: #FFFFFF;
       display: block;
       user-select: none;
-      letter-spacing: -0.5px;
     }
-    .fp-half-bottom .fp-char {
-      margin-top: -0.63em;   /* shift up: reveal only bottom half */
-    }
+    /* Bottom-half char: margin-top set inline by JS = -(panel-height/2) */
 
-    /* Animated flaps — layer above static halves */
+    /* Animated flaps — sit on top of static halves */
     .fp-flap-top,
     .fp-flap-bottom {
       position: absolute;
@@ -350,49 +345,45 @@
       overflow: hidden;
       pointer-events: none;
       z-index: 15;
-      backface-visibility: hidden;
       will-change: transform;
+      display: flex;
+      justify-content: center;
     }
 
     .fp-flap-top {
       top: 0;
       transform-origin: center bottom;
-      background: #252533;
-      border-radius: 3px 3px 0 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      /* inline perspective in transform — reliable even with overflow:hidden parent */
+      background: #25253A;
+      border-radius: 4px 4px 0 0;
+      /* ↓ flex-start: shows TOP half of digit (matches static-top) */
+      align-items: flex-start;
     }
-    /* Shadow gradient — falls downward as the flap folds */
     .fp-flap-top::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.55) 100%);
+      bottom: 0; left: 0; right: 0;
+      height: 60%;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5));
       pointer-events: none;
     }
 
     .fp-flap-bottom {
       bottom: 0;
       transform-origin: center top;
-      transform: rotateX(90deg); /* starts folded up / invisible */
-      background: #1A1A28;
-      border-radius: 0 0 3px 3px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      background: #1B1B2A;
+      border-radius: 0 0 4px 4px;
+      align-items: flex-start;     /* char shifted via inline margin-top like static-bottom */
+      /* hidden initially; transform set inline by JS via perspective() rotateX */
     }
-    /* Shadow gradient — fades away as flap unfolds */
     .fp-flap-bottom::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, transparent 30%, rgba(0,0,0,0.4) 100%);
+      top: 0; left: 0; right: 0;
+      height: 60%;
+      background: linear-gradient(to top, transparent, rgba(0,0,0,0.4));
       pointer-events: none;
     }
-
-    .fp-flap-top .fp-char  { /* same offset as static top */ }
-    .fp-flap-bottom .fp-char { margin-top: -0.63em; }
 
     .hero-actions {
       display: flex;
@@ -1941,71 +1932,99 @@
     document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
 
     // ── FLIP BOARD — Retro Split-Flap Counter ─────────────────
-    // One FlipDigit per character position; FlipBoard orchestrates.
+    //
+    // Root cause of previous visual glitch:
+    //   align-items: flex-end on top panels showed the BOTTOM
+    //   portion of each digit (inverted). Fixed to flex-start.
+    //   em-based sizing now replaced with px values read from
+    //   the parent's computed font-size, eliminating line-height
+    //   inheritance conflicts.
+
+    const P = 'perspective(200px) ';  // inline perspective — works regardless of overflow:hidden
 
     class FlipDigit {
-      constructor(container, initial = 0) {
+      // fontPx  : parent font-size in px
+      // panelH  : total panel height in px
+      constructor(container, fontPx, panelH) {
         this.container = container;
-        this.current   = initial;
+        this.fontPx    = fontPx;
+        this.panelH    = panelH;
+        this.halfH     = panelH / 2;
+        this.current   = 0;
         this._busy     = false;
-        this._build(initial);
+        this._build();
       }
 
-      _build(d) {
+      _char(txt, marginTop = 0) {
+        // line-height = panelH so the full digit fills the panel vertically
+        // margin-top shifts the char UP so clipping reveals the correct half
+        return `<span class="fp-char" style="font-size:${this.fontPx}px;line-height:${this.panelH}px;${marginTop ? `margin-top:-${this.halfH}px` : ''}">${txt}</span>`;
+      }
+
+      _build() {
         this.container.className = 'flip-digit';
+        this.container.style.height = this.panelH + 'px';
+        // Top half: align-items flex-start → char overflows DOWN → clip shows TOP of digit ✓
+        // Bot half: align-items flex-start + margin-top -halfH → char shifted UP → clip shows BOTTOM ✓
         this.container.innerHTML = `
-          <div class="fp-half fp-half-top"><span class="fp-char">${d}</span></div>
-          <div class="fp-half fp-half-bottom"><span class="fp-char">${d}</span></div>
-          <div class="fp-flap-top"><span class="fp-char">${d}</span></div>
-          <div class="fp-flap-bottom"><span class="fp-char">${d}</span></div>`;
+          <div class="fp-half fp-half-top">${this._char(0)}</div>
+          <div class="fp-half fp-half-bottom">${this._char(0, true)}</div>
+          <div class="fp-flap-top">${this._char(0)}</div>
+          <div class="fp-flap-bottom">${this._char(0, true)}</div>`;
+
         this._sTop  = this.container.querySelector('.fp-half-top .fp-char');
         this._sBot  = this.container.querySelector('.fp-half-bottom .fp-char');
         this._fTop  = this.container.querySelector('.fp-flap-top');
         this._fBot  = this.container.querySelector('.fp-flap-bottom');
         this._fTopC = this._fTop.querySelector('.fp-char');
         this._fBotC = this._fBot.querySelector('.fp-char');
+
+        // Initial flap states: top = flat/visible, bottom = folded 90° = invisible
+        this._fTop.style.transform = P + 'rotateX(0deg)';
+        this._fBot.style.transform = P + 'rotateX(90deg)';
       }
 
       reset(d = 0) {
         this.current = d;
         this._busy   = false;
         [this._sTop, this._sBot, this._fTopC, this._fBotC].forEach(n => n.textContent = d);
-        Object.assign(this._fTop.style, { transition: 'none', transform: 'rotateX(0deg)' });
-        Object.assign(this._fBot.style, { transition: 'none', transform: 'rotateX(90deg)' });
+        this._fTop.style.cssText = `transform:${P}rotateX(0deg)`;
+        this._fBot.style.cssText = `transform:${P}rotateX(90deg)`;
       }
 
-      flipTo(next, dur = 115) {
+      flipTo(next, dur = 160) {
         if (this._busy) return Promise.resolve();
         this._busy = true;
         const prev = this.current;
         this.current = next;
 
         return new Promise(resolve => {
-          // Stage flaps
+          // Stage the flaps: top shows prev (about to fold), bottom shows next (about to unfold)
           this._fTopC.textContent = prev;
-          Object.assign(this._fTop.style, { transition: 'none', transform: 'rotateX(0deg)' });
           this._fBotC.textContent = next;
-          Object.assign(this._fBot.style, { transition: 'none', transform: 'rotateX(90deg)' });
-          void this._fTop.offsetHeight; // force reflow
+          this._fTop.style.cssText = `transform:${P}rotateX(0deg)`;
+          this._fBot.style.cssText = `transform:${P}rotateX(90deg)`;
+          void this._fTop.offsetHeight; // force reflow before starting transition
 
-          // Phase 1: top flap folds down (ease-in)
-          this._fTop.style.transition = `transform ${dur}ms cubic-bezier(0.55,0,1,0.45)`;
-          this._fTop.style.transform  = 'rotateX(-90deg)';
+          // Phase 1 — top flap folds DOWN (ease-in: accelerates into fold)
+          this._fTop.style.cssText = `transition:transform ${dur}ms cubic-bezier(0.55,0,1,0.4);transform:${P}rotateX(-90deg)`;
 
           setTimeout(() => {
-            this._sTop.textContent = next; // midpoint: update static top
-            // Phase 2: bottom flap unfolds (ease-out)
-            this._fBot.style.transition = `transform ${dur}ms cubic-bezier(0,0.55,0.45,1)`;
-            this._fBot.style.transform  = 'rotateX(0deg)';
+            // Midpoint: top flap is edge-on/invisible → update static top to next
+            this._sTop.textContent = next;
+
+            // Phase 2 — bottom flap unfolds UP (ease-out: decelerates into flat)
+            this._fBot.style.cssText = `transition:transform ${dur}ms cubic-bezier(0,0.6,0.45,1);transform:${P}rotateX(0deg)`;
 
             setTimeout(() => {
+              // Done: sync static bottom, reset flaps to resting state
               this._sBot.textContent = next;
-              Object.assign(this._fTop.style, { transition: 'none', transform: 'rotateX(0deg)' });
-              Object.assign(this._fBot.style, { transition: 'none', transform: 'rotateX(90deg)' });
               this._fTopC.textContent = next;
+              this._fTop.style.cssText = `transform:${P}rotateX(0deg)`;
+              this._fBot.style.cssText = `transform:${P}rotateX(90deg)`;
               this._busy = false;
               resolve();
-            }, dur + 12);
+            }, dur + 16);
           }, dur);
         });
       }
@@ -2018,15 +2037,23 @@
         this.nDigits = String(this.target).length;
         this.digits  = [];
         this._run    = false;
+
+        // Read actual computed font-size of the parent element (hero=44px, minerva=64px)
+        const parentFS = parseFloat(window.getComputedStyle(el.parentElement).fontSize);
+        this.fontPx = Math.round(parentFS);
+        this.panelH = Math.round(parentFS * 1.22);  // e.g. 44→54px, 64→78px
+        this.panelW = Math.round(parentFS * 0.68);  // e.g. 44→30px, 64→44px
+
         this._init();
       }
 
       _init() {
         this.el.innerHTML = '';
         for (let i = 0; i < this.nDigits; i++) {
-          const d = document.createElement('div');
-          this.el.appendChild(d);
-          this.digits.push(new FlipDigit(d, 0));
+          const cell = document.createElement('div');
+          cell.style.width = this.panelW + 'px';
+          this.el.appendChild(cell);
+          this.digits.push(new FlipDigit(cell, this.fontPx, this.panelH));
         }
       }
 
@@ -2037,30 +2064,28 @@
         this._run = true;
         this.reset();
 
-        const FLIP    = 115; // ms per half-flip
-        const GAP     = 18;  // pause between successive flips on same digit
-        const STAGGER = 55;  // ms column offset (left→right reveal)
+        const FLIP    = 160;  // ms per phase (fold + unfold)
+        const GAP     = 22;   // ms pause between consecutive flips on same digit
+        const STAGGER = 65;   // ms offset per column (left→right cascade)
 
         const targetStr = String(this.target).padStart(this.nDigits, '0');
 
-        const promises = targetStr.split('').map((ch, col) => {
+        await Promise.all(targetStr.split('').map((ch, col) => {
           const tgt = parseInt(ch);
-          return new Promise(async resolve => {
+          return (async () => {
             await new Promise(r => setTimeout(r, col * STAGGER));
             for (let v = 1; v <= tgt; v++) {
               await this.digits[col].flipTo(v, FLIP);
               if (v < tgt) await new Promise(r => setTimeout(r, GAP));
             }
-            resolve();
-          });
-        });
+          })();
+        }));
 
-        await Promise.all(promises);
         this._run = false;
       }
     }
 
-    // Wire up every .counter element as a FlipBoard
+    // Initialise every .counter as a FlipBoard
     document.querySelectorAll('.counter').forEach(el => {
       el._flipBoard = new FlipBoard(el);
     });
@@ -2071,27 +2096,25 @@
       });
     }
 
-    // Hero — re-fires every scroll-into-view
+    // Hero — re-fires on every scroll-into-view
     const heroStatsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting)
           document.querySelectorAll('#hero-stats .counter').forEach(el => {
             if (el._flipBoard) el._flipBoard.animateTo();
           });
-        }
       });
     }, { threshold: 0.5 });
     const heroStatsEl = document.getElementById('hero-stats');
     if (heroStatsEl) heroStatsObserver.observe(heroStatsEl);
 
-    // Minerva — re-fires every scroll-into-view
+    // Minerva — re-fires on every scroll-into-view
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting)
           entry.target.querySelectorAll('.counter').forEach(el => {
             if (el._flipBoard) el._flipBoard.animateTo();
           });
-        }
       });
     }, { threshold: 0.3 });
 
