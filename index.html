@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rukhtam Amin — Lead AI Engineer</title>
   <meta name="description" content="Lead QA Automation Engineer & AI Infrastructure Architect. 8 years building AI test ecosystems, RAG frameworks, MCP architectures, and enterprise-grade automation at scale.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230D0D14'/%3E%3Crect x='1' y='1' width='30' height='30' fill='none' stroke='%23CFCFE3' stroke-width='1' opacity='0.3'/%3E%3Ctext x='16' y='22' font-family='Arial Black,Arial,sans-serif' font-weight='900' font-size='13' fill='%23FFFFFF' text-anchor='middle' letter-spacing='1.5'%3ERA%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Courier+Prime:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -891,6 +892,40 @@
     .project-card:hover { background: rgba(30,30,28,1); }
     .project-card:hover::before { background: rgba(255,255,255,0.25); }
 
+    /* Project icon */
+    .project-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .project-icon {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(207,207,227,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      border-color: rgba(207,207,227,0.35);
+      transform: scale(1.06);
+    }
+
+    .project-icon img,
+    .project-icon svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
     .project-num {
       font-family: 'Courier Prime', monospace;
       font-size: 11px;
@@ -1531,7 +1566,12 @@
 
       <!-- Days Since Tracker -->
       <div class="project-card" data-reveal>
-        <div class="project-num">01 / Android App</div>
+        <div class="project-card-header">
+          <div class="project-num">01 / Android App</div>
+          <div class="project-icon">
+            <svg width="56" height="56" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><circle cx="512" cy="512" r="448" fill="#1A1A1A"/><circle cx="512" cy="512" r="324" fill="none" stroke="#2A2A2A" stroke-width="72" stroke-linecap="round"/><circle cx="512" cy="512" r="324" fill="none" stroke="#4CAF50" stroke-width="72" stroke-linecap="round" stroke-dasharray="1527 509" transform="rotate(-90 512 512)"/><text x="512" y="630" font-family="system-ui,sans-serif" font-size="420" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text></svg>
+          </div>
+        </div>
         <h3 class="monument project-name">DAYS SINCE TRACKER</h3>
         <p class="project-desc">
           Native Android app shipped to Google Play. <strong>300+ downloads</strong> since
@@ -1554,7 +1594,12 @@
 
       <!-- QuestionForge -->
       <div class="project-card" data-reveal data-delay="1">
-        <div class="project-num">02 / AI Web App</div>
+        <div class="project-card-header">
+          <div class="project-num">02 / AI Web App</div>
+          <div class="project-icon">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAFLElEQVR4nOWbO29URxTHf3N3Jb+giJKwUiI5BUmRyqSJ7RqE4li2KxfmQxDJNIYCvgA9FFggwWdAPISEkCkSFxEFwnYEdoqEIrEL24m0jzsnxZ2zO3u93teda4xzpNFqH3fm/OY/M2dea8hmBigANe+zYWAMGHev3wBfAJ8DI+43/wB/AX8Ab4FfgV+AV8C/Xl5FIAYko589m4KpDQLTwB3gN8A6p3pJ1j17x+U16OVfcGUeiflgJeAasMFBh2suxbQGtu47/V36+3WX95lDyg5uvmrDwBLw3nMoBqo0mlQ/qVUe74GrNJp3LmpGXqY/AK89B7JCdYLV969d2ThfolBwqloRuJkC66ev9dM3fdCbzhfft8xwJeAZjZrNQ7FuFNVyn9Hom31D6oNfA29cxpUPAJZO6sMb51tfkNq+zwJbNJrkh4bzu4c4386mfO4KzpAE5vVjCJeGXHe+djXwaCgoAM+PMVwa8rnnd9sQoqOTjpbB+5wxJjSk+ngzxXDAtKOeT9XOx5DU1wsplrpp+x2mMe0KHgqiKJKRkRExxoRWUn3dAIZonpg0ES+laiRIKhQKAsjFixfl0aNHddicVFxKq6i0n5EsYQ6bHGcCNMbIixcvRERkenq6CTxQ0sn7346lPqpqp7yap3oLCwsiIlKr1WRtbU0GBgYkiqLQTVV9v+aYijjSQWDTq4UgBRpj6v1uc3NTrLVSqVRERGRxcTEPFbX1bTqmej/80ftBcPWuX79eV89aK3Ecy/b2tpRKJYmiKHR/VIYpPFvm4Kw9U9LmNzo6Kru7uxLHsVhrRUSkWq2KiMitW7fyUFFXOcsKN0SyLxJUQXX6/v37dfXUVMVqtSpjY2OhIZXhrWNjIiSY7+zExITEcdwEp6afPXnyJA8VFXQC4LL7oNW+SN+AxhhZWVk5oF4ryNnZ2dCQyvITwL2QgK3CwmGm/TKHsKEsdwFWPEkzZdwqLMRxfCigXwGBw4ayrAC8c28yz15ahYVOFsexxHEsOzs7IcOGsrwD2AvRNNuFhU6WY9jYJYRyvlOtwkInyzFs2CCA6szk5KRYa3uCU9Nnnj59GhxwNwSgMUZevnzZs3qtIOfm5kJB7kLGQUaduHTpUiY4keawMTg4mCVsNA0yfYcJDQunTp2Sra2trsJCtypeuXIli4pNYeKue9NzoNfCb9y4kVk9tUBhQ1nuQTKd6RnQDwt7e3s9hYVOpmHj9u3b/aqoLJehz8m2FvrgwQMRCaOemh82zp071y9kfbLd83JJCxsfH5darSbVarXetKy1QVKlUhFrrTx+/LjeYnrsf/XlEvSw4NWBpVgsyurqajDV2tn8/HwvKjYteHXPYgp46L5ou79fKBSI45iZmRmWl5cpl8tEUbCzyCaz1hJFERsbG0xNTVEulwEQkbaPkTBMAw8NCeQAyXHUVyS10NHj06dPd1NYJjPGICIUi0X29/ep1WqdHrEkPL8D3wJlaGwbXqMhca8d+rgk9f2qYyrq5qgAnwJrwCeuFtqe0hhzZLc6gK5aikLukKi3jceQ69b9EaVDt+6hsc09RI6HLzkm//BlmBaHLz7xhVSNfAxJfT2fYjlguR+A5pC6PgCF/8ERNpzwSwg+JJzQayRqJ/oiUBryDMfvKlcpK1wa8kRexlM7Ltcp/UPN4EsY/0LsCMmE9qguxC6RzFDgCK43+83iDMkqRMOJn7Jead5weZdoWK5Xmn37aC6lZ5W63d8Kvge+I4lTX9L6bwV/kkC9An4mh78V/AfJKctf8fj8qgAAAABJRU5ErkJggg==" alt="QuestionForge" width="56" height="56" style="border-radius:8px;">
+          </div>
+        </div>
         <h3 class="monument project-name">QUESTIONFORGE</h3>
         <p class="project-desc">
           AI-powered exam question and worksheet generator for teachers.
@@ -1578,7 +1623,25 @@
 
       <!-- MilkyWay -->
       <div class="project-card" data-reveal data-delay="2">
-        <div class="project-num">03 / PWA</div>
+        <div class="project-card-header">
+          <div class="project-num">03 / PWA</div>
+          <div class="project-icon">
+            <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+              <rect width="56" height="56" rx="12" fill="#1565C0"/>
+              <!-- Milk bottle silhouette -->
+              <g fill="#FFFFFF" opacity="0.95">
+                <!-- Bottle cap -->
+                <rect x="23" y="9" width="10" height="4" rx="2"/>
+                <!-- Bottle neck -->
+                <rect x="24" y="13" width="8" height="5"/>
+                <!-- Bottle shoulder -->
+                <path d="M20 18 Q20 20 17 22 L17 44 Q17 46 19 46 L37 46 Q39 46 39 44 L39 22 Q36 20 36 18 Z"/>
+              </g>
+              <!-- Milk fill line (blue tinted) -->
+              <path d="M18 34 L38 34 L38 44 Q38 45 37 45 L19 45 Q18 45 18 44 Z" fill="#BBDEFB" opacity="0.4"/>
+            </svg>
+          </div>
+        </div>
         <h3 class="monument project-name">MILKYWAY</h3>
         <p class="project-desc">
           Progressive Web App for tracking daily milk deliveries and household bills.
@@ -1601,7 +1664,21 @@
 
       <!-- Flatland -->
       <div class="project-card" data-reveal data-delay="3">
-        <div class="project-num">04 / Game Dev</div>
+        <div class="project-card-header">
+          <div class="project-num">04 / Game Dev</div>
+          <div class="project-icon">
+            <svg width="56" height="56" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+              <rect width="128" height="128" fill="#0D1117"/>
+              <g transform="translate(64, 64)">
+                <rect x="-24" y="-24" width="48" height="48" fill="#3A86FF" stroke="#3A86FF" stroke-width="2"/>
+                <line x1="-50" y1="0" x2="-30" y2="0" stroke="#8338EC" stroke-width="2" opacity="0.7"/>
+                <line x1="30" y1="0" x2="50" y2="0" stroke="#8338EC" stroke-width="2" opacity="0.7"/>
+                <line x1="0" y1="-50" x2="0" y2="-30" stroke="#8338EC" stroke-width="2" opacity="0.7"/>
+                <line x1="0" y1="30" x2="0" y2="50" stroke="#8338EC" stroke-width="2" opacity="0.7"/>
+              </g>
+            </svg>
+          </div>
+        </div>
         <h3 class="monument project-name">FLATLAND:<br>EDGE OF PERCEPTION</h3>
         <p class="project-desc">
           A 2D puzzle-platformer game inspired by Edwin Abbott's <em>Flatland</em>.
@@ -1727,33 +1804,66 @@
 
     document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
 
-    // ── Counter animation ──────────────────────────────────────
-    function animateCounter(el, target, duration = 1500) {
+    // ── Counter animation — RETRO SCRAMBLE ────────────────────
+    const SCRAMBLE_CHARS = '0123456789';
+    function animateCounter(el, target, duration = 1800) {
+      // Cancel any running animation on this element
+      if (el._scrambleRaf) cancelAnimationFrame(el._scrambleRaf);
+      const scramblePhasePct = 0.62; // 62% scramble, 38% settle
       const start = performance.now();
+      const digits = String(target).length;
+
       const update = (time) => {
         const elapsed = Math.min((time - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - elapsed, 3); // ease out cubic
-        el.textContent = Math.round(eased * target);
-        if (elapsed < 1) requestAnimationFrame(update);
-        else el.textContent = target;
+
+        if (elapsed < scramblePhasePct) {
+          // Rapid random digits — slot-machine chaos
+          const rand = Math.floor(Math.random() * Math.pow(10, digits));
+          el.textContent = String(rand).padStart(digits, '0').slice(-digits);
+        } else {
+          // Ease-out cubic settle toward target
+          const t = (elapsed - scramblePhasePct) / (1 - scramblePhasePct);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(eased * target);
+        }
+
+        if (elapsed < 1) {
+          el._scrambleRaf = requestAnimationFrame(update);
+        } else {
+          el.textContent = target;
+          el._scrambleRaf = null;
+        }
       };
-      requestAnimationFrame(update);
+      el._scrambleRaf = requestAnimationFrame(update);
     }
 
     function startHeroCounters() {
       document.querySelectorAll('#hero-stats .counter').forEach(el => {
-        animateCounter(el, parseInt(el.dataset.target), 1400);
+        animateCounter(el, parseInt(el.dataset.target), 1800);
       });
     }
 
-    // Counters in minerva section
+    // Hero section re-fires counters every time it enters view
+    const heroStatsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('#hero-stats .counter').forEach(el => {
+            animateCounter(el, parseInt(el.dataset.target), 1800);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    const heroStatsEl = document.getElementById('hero-stats');
+    if (heroStatsEl) heroStatsObserver.observe(heroStatsEl);
+
+    // Counters in minerva section — re-fires every scroll-into-view
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.querySelectorAll('.counter').forEach(el => {
-            animateCounter(el, parseInt(el.dataset.target), 1200);
+            animateCounter(el, parseInt(el.dataset.target), 1400);
           });
-          counterObserver.unobserve(entry.target);
+          // No unobserve — triggers every time
         }
       });
     }, { threshold: 0.3 });
