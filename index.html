@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rukhtam Amin — Lead AI Engineer</title>
+  <meta name="description" content="Lead QA Automation Engineer & AI Infrastructure Architect. 8 years building AI test ecosystems, RAG frameworks, MCP architectures, and enterprise-grade automation at scale.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Courier+Prime:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM — HACKER ENERGY
+       Inspired by NetworkChuck aesthetic
+       ============================================================ */
+    :root {
+      --bg:       #0D0D14;
+      --bg-navy:  #171723;
+      --bg-alt:   #1F2119;
+      --bg-dark:  #080810;
+      --surface:  rgba(255,255,255,0.04);
+      --border:   rgba(207,207,227,0.10);
+      --text:     #FFFFFF;
+      --muted:    #CFCFE3;
+      --dim:      rgba(207,207,227,0.45);
+      --cta-bg:   #FFFFFF;
+      --cta-text: #000000;
+      --glow-1:   rgba(100,80,220,0.18);
+      --glow-2:   rgba(220,150,80,0.12);
+      --phase1:   #141420;
+      --phase2:   #111816;
+      --phase3:   #0A0A18;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Courier Prime', monospace;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================================
+       TYPOGRAPHY
+       ============================================================ */
+    .monument {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.4px;
+      line-height: 0.92;
+    }
+
+    .poppins { font-family: 'Poppins', sans-serif; }
+    .mono    { font-family: 'Courier Prime', monospace; }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(13,13,20,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(2px);
+      transition: background 0.3s ease;
+    }
+
+    #nav.scrolled {
+      background: rgba(13,13,20,0.97);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-family: 'Courier Prime', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 8px 24px;
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 0;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-cta:hover { background: var(--muted); color: var(--bg); }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg-dark);
+    }
+
+    /* CSS circuit/grid background */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(207,207,227,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(207,207,227,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    /* Radial glow blobs */
+    .hero-glow-1 {
+      position: absolute;
+      top: -200px; left: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse at center, rgba(80,60,200,0.25) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse at center, rgba(200,130,50,0.12) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 80px;
+      max-width: 1400px;
+      width: 100%;
+      padding-top: 100px;
+    }
+
+    .hero-pre {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      letter-spacing: 4px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+    }
+
+    .hero-pre span { color: rgba(207,207,227,0.5); }
+
+    .hero-name {
+      font-size: clamp(72px, 10vw, 128px);
+      color: var(--text);
+      margin-bottom: 8px;
+      opacity: 0;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4.5vw, 60px);
+      color: var(--muted);
+      margin-bottom: 40px;
+      opacity: 0;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 2px;
+      background: var(--text);
+      margin-bottom: 32px;
+      opacity: 0;
+    }
+
+    .hero-tagline {
+      font-family: 'Courier Prime', monospace;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 56px;
+      opacity: 0;
+    }
+
+    .hero-tagline strong { color: var(--text); font-weight: 700; }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-bottom: 56px;
+      opacity: 0;
+    }
+
+    .hero-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 44px;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .hero-stat-sep {
+      width: 1px;
+      background: var(--border);
+      height: 60px;
+      align-self: center;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      opacity: 0;
+    }
+
+    .btn-primary {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      padding: 16px 40px;
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 0;
+      transition: background 0.2s ease, color 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--muted); }
+
+    .btn-secondary {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      padding: 16px 40px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 0;
+      transition: border-color 0.2s ease, color 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { border-color: var(--text); }
+
+    /* Scroll down indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 80px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    .scroll-line {
+      width: 48px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .scroll-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      animation: scrollDownAnimation 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollDownAnimation {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50%       { transform: translateY(8px); opacity: 1; }
+    }
+
+    /* ============================================================
+       SECTION SHARED STYLES
+       ============================================================ */
+    section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--dim);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-headline {
+      font-size: clamp(44px, 6vw, 80px);
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .section-sub {
+      font-family: 'Courier Prime', monospace;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* Reveal animation */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.85s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    [data-reveal][data-delay="1"] { transition-delay: 0.1s; }
+    [data-reveal][data-delay="2"] { transition-delay: 0.2s; }
+    [data-reveal][data-delay="3"] { transition-delay: 0.3s; }
+    [data-reveal][data-delay="4"] { transition-delay: 0.4s; }
+    [data-reveal][data-delay="5"] { transition-delay: 0.5s; }
+    [data-reveal][data-delay="6"] { transition-delay: 0.6s; }
+
+    /* ============================================================
+       JOURNEY SECTION
+       ============================================================ */
+    #journey {
+      background: var(--bg-navy);
+      padding: 120px 80px;
+    }
+
+    .journey-intro {
+      max-width: 800px;
+      margin-bottom: 96px;
+    }
+
+    .journey-phases {
+      display: grid;
+      gap: 0;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 80px;
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .phase:last-child { border-bottom: 1px solid var(--border); }
+
+    .phase-left {
+      position: relative;
+    }
+
+    .phase-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 120px;
+      color: rgba(207,207,227,0.05);
+      line-height: 1;
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      pointer-events: none;
+    }
+
+    .phase-badge {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .phase-badge.active {
+      border-color: rgba(255,255,255,0.4);
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .phase-year {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+
+    .phase-title {
+      font-size: clamp(28px, 3.5vw, 44px);
+      color: var(--text);
+      margin: 12px 0 8px;
+      line-height: 1;
+    }
+
+    .phase-role {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      color: var(--dim);
+      letter-spacing: 1px;
+    }
+
+    .phase-body {
+      padding-top: 4px;
+    }
+
+    .phase-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .phase-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .tag.highlight {
+      border-color: rgba(255,255,255,0.3);
+      color: var(--text);
+    }
+
+    /* ============================================================
+       MINERVA SECTION
+       ============================================================ */
+    #minerva {
+      background: var(--bg-dark);
+      padding: 120px 80px;
+      position: relative;
+    }
+
+    #minerva::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(100,80,200,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,80,200,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .minerva-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse at center, rgba(70,50,180,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .minerva-header {
+      max-width: 900px;
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .minerva-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat-box {
+      background: var(--bg-dark);
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 64px;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .stat-unit {
+      color: var(--muted);
+      font-size: 40px;
+    }
+
+    .stat-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+
+    .frameworks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      position: relative;
+      z-index: 2;
+    }
+
+    .framework-card {
+      background: var(--bg-dark);
+      padding: 48px;
+      transition: background 0.3s ease;
+    }
+
+    .framework-card:hover { background: rgba(207,207,227,0.03); }
+
+    .fw-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--dim);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .fw-title {
+      font-size: clamp(22px, 2.5vw, 32px);
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .fw-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .fw-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .fw-tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      padding: 4px 10px;
+      background: rgba(207,207,227,0.06);
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* MCP Table */
+    .mcp-section {
+      margin-top: 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mcp-title {
+      font-size: clamp(28px, 3vw, 40px);
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .mcp-sub {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      color: var(--dim);
+      margin-bottom: 40px;
+    }
+
+    .mcp-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .mcp-card {
+      background: var(--bg-dark);
+      padding: 32px 28px;
+    }
+
+    .mcp-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: var(--text);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .mcp-tools {
+      font-family: 'Courier Prime', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .mcp-tools span { font-size: 14px; color: var(--dim); }
+
+    .mcp-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      color: var(--dim);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       PROJECTS SECTION
+       ============================================================ */
+    #projects {
+      background: var(--bg-alt);
+      padding: 120px 80px;
+    }
+
+    .projects-header {
+      max-width: 800px;
+      margin-bottom: 80px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(207,207,227,0.08);
+    }
+
+    .project-card {
+      background: var(--bg-alt);
+      padding: 56px 48px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.3s ease;
+    }
+
+    .project-card:hover { background: rgba(30,30,28,1); }
+    .project-card:hover::before { background: rgba(255,255,255,0.25); }
+
+    .project-num {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--dim);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .project-name {
+      font-size: clamp(26px, 2.8vw, 38px);
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .project-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+
+    .stack-tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .project-link {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease;
+    }
+
+    .project-link:hover { border-color: var(--text); }
+
+    .project-badge {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    .live-badge-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ADE80;
+      margin-right: 6px;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* ============================================================
+       CONTACT / CTA SECTION
+       ============================================================ */
+    #contact {
+      background: var(--bg-dark);
+      padding: 160px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(207,207,227,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(207,207,227,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .contact-glow {
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 800px; height: 800px;
+      background: radial-gradient(ellipse at center, rgba(70,50,180,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+    }
+
+    .contact-pre {
+      font-family: 'Courier Prime', monospace;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--dim);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .contact-headline {
+      font-size: clamp(56px, 8vw, 112px);
+      color: var(--text);
+      margin-bottom: 24px;
+      line-height: 0.9;
+    }
+
+    .contact-sub {
+      font-family: 'Courier Prime', monospace;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 64px;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .contact-link:hover { color: var(--text); }
+
+    .contact-link-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: border-color 0.2s ease;
+    }
+
+    .contact-link:hover .contact-link-icon { border-color: var(--text); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+      padding: 32px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: rgba(207,207,227,0.3);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      #nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+
+      .hero-content { padding: 0 24px; padding-top: 100px; }
+      .scroll-indicator { left: 24px; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+
+      #journey { padding: 80px 24px; }
+      .phase { grid-template-columns: 1fr; gap: 24px; }
+      .phase-number { display: none; }
+
+      #minerva { padding: 80px 24px; }
+      .minerva-stats { grid-template-columns: repeat(2, 1fr); }
+      .frameworks-grid { grid-template-columns: 1fr; }
+      .mcp-grid { grid-template-columns: repeat(2, 1fr); }
+
+      #projects { padding: 80px 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+
+      #contact { padding: 100px 24px; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; }
+    }
+
+    /* ============================================================
+       LOADER
+       ============================================================ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .loader-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      letter-spacing: 4px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .loader-bar {
+      width: 200px;
+      height: 1px;
+      background: rgba(207,207,227,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--text);
+      animation: loadBar 1.2s ease forwards;
+    }
+
+    @keyframes loadBar {
+      to { left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADER
+       ============================================================ -->
+  <div id="loader">
+    <div class="loader-text">Initialising</div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">RA</a>
+    <ul class="nav-links">
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#minerva">AI Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://rukhtam.github.io/rukhtam-amin-cv" target="_blank" class="nav-cta">View CV →</a>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section id="hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="hero-content">
+      <p class="hero-pre" id="hero-pre">
+        <span>〈</span> Lead AI Engineer · Pakistan · 2026 <span>〉</span>
+      </p>
+      <h1 class="monument hero-name" id="hero-name">RUKHTAM AMIN</h1>
+      <h2 class="monument hero-title" id="hero-title">AI Architect &amp; Automation Lead</h2>
+      <div class="hero-divider" id="hero-divider"></div>
+      <p class="hero-tagline" id="hero-tagline">
+        <strong>8 years building the systems that test enterprise AI.</strong><br>
+        RAG evaluation, voice persona scoring, MCP-native agent workflows,<br>
+        and 30,000+ lines of automation deployed at production scale.
+      </p>
+
+      <div class="hero-stats" id="hero-stats">
+        <div>
+          <div class="hero-stat-num"><span class="counter" data-target="130">0</span>+</div>
+          <div class="hero-stat-label">Components Built</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div>
+          <div class="hero-stat-num"><span class="counter" data-target="30">0</span>K+</div>
+          <div class="hero-stat-label">Lines of Code</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div>
+          <div class="hero-stat-num"><span class="counter" data-target="8">0</span></div>
+          <div class="hero-stat-label">Years at Afiniti</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div>
+          <div class="hero-stat-num"><span class="counter" data-target="48">0</span>+</div>
+          <div class="hero-stat-label">Test Suites Delivered</div>
+        </div>
+      </div>
+
+      <div class="hero-actions" id="hero-actions">
+        <a href="#contact" class="btn-primary">Hire Me</a>
+        <a href="https://rukhtam.github.io/rukhtam-amin-cv" target="_blank" class="btn-secondary">View CV →</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" id="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span class="scroll-text scroll-arrow">↓ Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       JOURNEY
+       ============================================================ -->
+  <section id="journey">
+    <div class="journey-intro">
+      <p class="section-label" data-reveal>Professional Journey</p>
+      <h2 class="monument section-headline" data-reveal data-delay="1">8 YEARS.<br>THREE PHASES.<br>ONE TRAJECTORY.</h2>
+      <p class="section-sub" data-reveal data-delay="2">
+        From manually testing telephony flows to architecting the AI evaluation
+        infrastructure that scores enterprise LLM conversations across 13 quality
+        dimensions. Each phase was a complete evolution — not an increment.
+      </p>
+    </div>
+
+    <div class="journey-phases">
+
+      <!-- PHASE 1 -->
+      <div class="phase">
+        <div class="phase-left" data-reveal>
+          <div class="phase-number">01</div>
+          <span class="phase-badge">Phase 01</span>
+          <div class="phase-year">2017 – 2019</div>
+          <h3 class="monument phase-title">FOUNDATION</h3>
+          <div class="phase-role">Analyst Software Engineer</div>
+        </div>
+        <div class="phase-body" data-reveal data-delay="2">
+          <p class="phase-desc">
+            Joined Afiniti as the youngest engineer on the team. Started with manual E2E testing for
+            SATMAP — an in-house AI call-pairing system — then navigated the platform's full
+            architectural migration from Windows services to Docker-containerized microservices.
+            Built Python automation tools to eliminate manual log extraction, discovered and shared
+            JIRA bulk-transition workflows that cut team overhead significantly.
+            <br><br>
+            Selected as the youngest team member for an on-site deployment in <strong>Denver, Colorado</strong> —
+            delivering Avaya Native Integration in a live enterprise environment.
+          </p>
+          <div class="phase-tags">
+            <span class="tag">Manual QA</span>
+            <span class="tag">Python Scripting</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Avaya Telephony</span>
+            <span class="tag highlight">Denver On-site Deployment</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase">
+        <div class="phase-left" data-reveal>
+          <div class="phase-number">02</div>
+          <span class="phase-badge">Phase 02</span>
+          <div class="phase-year">2019 – 2023</div>
+          <h3 class="monument phase-title">MACHINE<br>LEARNING</h3>
+          <div class="phase-role">Senior QA Engineer</div>
+        </div>
+        <div class="phase-body" data-reveal data-delay="2">
+          <p class="phase-desc">
+            Moved into the ML core — managing QA for the "Evaluator" microservice, which used Bayesian
+            probability and ML models to pair call centre agents with optimal customers in real time.
+            Ran ETL pipelines with Pandas to train data and surface patterns. Built TensorFlow models
+            (image classification, MNIST hand-sign recognition) to deepen ML understanding.
+            <br><br>
+            Delivered <strong>100+ user stories</strong>, built <strong>1,000+ custom Git-managed scripts</strong>,
+            and earned <strong>Best Performer of the Quarter</strong> with consecutive exceptional reviews.
+          </p>
+          <div class="phase-tags">
+            <span class="tag">TensorFlow</span>
+            <span class="tag">Pandas ETL</span>
+            <span class="tag">Bayesian ML</span>
+            <span class="tag">MySQL / PostgreSQL</span>
+            <span class="tag">Selenium / TestNG</span>
+            <span class="tag highlight">Best Performer Award</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase">
+        <div class="phase-left" data-reveal>
+          <div class="phase-number">03</div>
+          <span class="phase-badge active">Phase 03 · Current</span>
+          <div class="phase-year">2023 – Present</div>
+          <h3 class="monument phase-title">AI<br>LEADERSHIP</h3>
+          <div class="phase-role">Lead QA Automation Engineer</div>
+        </div>
+        <div class="phase-body" data-reveal data-delay="2">
+          <p class="phase-desc">
+            Selected to architect the entire QA strategy for <strong>MINERVA</strong> — Afiniti's enterprise
+            AI Agent platform spanning WebRTC voice, Amazon Connect IVA, WhatsApp, and Webex.
+            Built a 130+ component, 30,000+ line AI test ecosystem from the ground up.
+            <br><br>
+            Deployed five MCP servers to give Claude Code tool-native access to JIRA, Confluence,
+            Bitbucket, and Playwright — compressing full automation workflows from hours to minutes.
+            Ran 23 evaluation cycles using Claude Sonnet via AWS Bedrock to score 203 real Minerva
+            conversations across 13 quality dimensions.
+          </p>
+          <div class="phase-tags">
+            <span class="tag">Cypress E2E</span>
+            <span class="tag">RAG Evaluation</span>
+            <span class="tag">MCP Architecture</span>
+            <span class="tag">Claude / Bedrock</span>
+            <span class="tag">Jenkins CI/CD</span>
+            <span class="tag highlight">2× WoW Awards 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MINERVA / AI WORK
+       ============================================================ -->
+  <section id="minerva">
+    <div class="minerva-glow"></div>
+
+    <div class="minerva-header">
+      <p class="section-label" data-reveal>AI Infrastructure · MINERVA</p>
+      <h2 class="monument section-headline" data-reveal data-delay="1">THE ECOSYSTEM<br>THAT EVALUATES AI.</h2>
+      <p class="section-sub" data-reveal data-delay="2">
+        A complete, production-deployed test automation ecosystem for an enterprise
+        AI Agent platform — built from scratch, operating at scale.
+      </p>
+    </div>
+
+    <!-- Stats row -->
+    <div class="minerva-stats">
+      <div class="stat-box" data-reveal>
+        <div class="stat-value"><span class="counter" data-target="130">0</span><span class="stat-unit">+</span></div>
+        <div class="stat-desc">Components Built</div>
+      </div>
+      <div class="stat-box" data-reveal data-delay="1">
+        <div class="stat-value"><span class="counter" data-target="30">0</span><span class="stat-unit">K+</span></div>
+        <div class="stat-desc">Lines of Code</div>
+      </div>
+      <div class="stat-box" data-reveal data-delay="2">
+        <div class="stat-value"><span class="counter" data-target="48">0</span><span class="stat-unit">+</span></div>
+        <div class="stat-desc">Test Suites</div>
+      </div>
+      <div class="stat-box" data-reveal data-delay="3">
+        <div class="stat-value"><span class="counter" data-target="203">0</span></div>
+        <div class="stat-desc">AI Eval Runs</div>
+      </div>
+    </div>
+
+    <!-- Frameworks 2×2 grid -->
+    <div class="frameworks-grid">
+
+      <div class="framework-card" data-reveal>
+        <div class="fw-number">Framework 01</div>
+        <h3 class="monument fw-title">RAG TRIAD EVALUATION</h3>
+        <p class="fw-desc">
+          Comprehensive RAG quality framework assessing <strong>Context Relevance,
+          Faithfulness, and Answer Relevance</strong> using RAGAS integration.
+          Includes adversarial robustness testing — prompt injection resistance,
+          jailbreak detection — producing scored HTML + JSON reports per run.
+        </p>
+        <div class="fw-tags">
+          <span class="fw-tag">~3,360 lines</span>
+          <span class="fw-tag">Python</span>
+          <span class="fw-tag">RAGAS</span>
+          <span class="fw-tag">Adversarial Testing</span>
+        </div>
+      </div>
+
+      <div class="framework-card" data-reveal data-delay="1">
+        <div class="fw-number">Framework 02</div>
+        <h3 class="monument fw-title">VOICE PERSONA EVALUATION</h3>
+        <p class="fw-desc">
+          Standalone acoustic scoring system using <strong>librosa, numpy, and pytest</strong>
+          to validate AI agent voice personas. Measures MOS scoring, pitch/jitter/shimmer,
+          tone consistency, and breakpoint detection across four configurable judge personas:
+          empathetic, professional, efficient, and friendly.
+        </p>
+        <div class="fw-tags">
+          <span class="fw-tag">~3,750 lines</span>
+          <span class="fw-tag">Python</span>
+          <span class="fw-tag">librosa</span>
+          <span class="fw-tag">MOS Scoring</span>
+        </div>
+      </div>
+
+      <div class="framework-card" data-reveal data-delay="2">
+        <div class="fw-number">Framework 03</div>
+        <h3 class="monument fw-title">LEVELUP AI EVALUATOR</h3>
+        <p class="fw-desc">
+          Docker-containerised evaluation service using <strong>Claude Sonnet 4.6 via AWS Bedrock</strong>
+          to score real Minerva conversations across 13 quality dimensions — Adversarial Robustness,
+          Hallucination Rate, KB Retrieval, CSAT Proxy, Context Memory, and Skill Usage Accuracy.
+          23 runs. 203 output files.
+        </p>
+        <div class="fw-tags">
+          <span class="fw-tag">Docker</span>
+          <span class="fw-tag">AWS Bedrock</span>
+          <span class="fw-tag">Claude Sonnet</span>
+          <span class="fw-tag">13 Quality Dims</span>
+        </div>
+      </div>
+
+      <div class="framework-card" data-reveal data-delay="3">
+        <div class="fw-number">Framework 04</div>
+        <h3 class="monument fw-title">AI TEST GENERATION</h3>
+        <p class="fw-desc">
+          <strong>generateCypressTests.js</strong> (812 lines) — Anthropic SDK-powered tool
+          that fetches JIRA test tickets and auto-generates production-ready Cypress E2E tests
+          grounded in the live Page Object Model. Paired with <strong>epicTestRunner.js</strong>
+          to execute the full pipeline: Epic → Tests → CI Report — in a single command.
+        </p>
+        <div class="fw-tags">
+          <span class="fw-tag">~1,643 lines</span>
+          <span class="fw-tag">Anthropic SDK</span>
+          <span class="fw-tag">Cypress</span>
+          <span class="fw-tag">JIRA Integration</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MCP Architecture -->
+    <div class="mcp-section">
+      <h3 class="monument mcp-title" data-reveal>MCP SERVER ARCHITECTURE</h3>
+      <p class="mcp-sub" data-reveal data-delay="1">Five MCP servers deployed project-wide — giving Claude Code tool-native access to the entire dev ecosystem.</p>
+      <div class="mcp-grid">
+        <div class="mcp-card" data-reveal>
+          <div class="mcp-name">JIRA</div>
+          <div class="mcp-tools">191 <span>tools</span></div>
+          <div class="mcp-desc">Issues, sprints, boards, bulk workflows</div>
+        </div>
+        <div class="mcp-card" data-reveal data-delay="1">
+          <div class="mcp-name">Confluence</div>
+          <div class="mcp-tools">44 <span>tools</span></div>
+          <div class="mcp-desc">Specs, pages, search, attachments</div>
+        </div>
+        <div class="mcp-card" data-reveal data-delay="2">
+          <div class="mcp-name">Bitbucket</div>
+          <div class="mcp-tools">48 <span>tools</span></div>
+          <div class="mcp-desc">Repos, PRs, branches, diffs</div>
+        </div>
+        <div class="mcp-card" data-reveal data-delay="3">
+          <div class="mcp-name">Playwright</div>
+          <div class="mcp-tools">— <span>&nbsp;</span></div>
+          <div class="mcp-desc">Live browser automation & test exploration</div>
+        </div>
+        <div class="mcp-card" data-reveal data-delay="4">
+          <div class="mcp-name">JIRA Local</div>
+          <div class="mcp-tools">— <span>&nbsp;</span></div>
+          <div class="mcp-desc">Offline/dev local instance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS
+       ============================================================ -->
+  <section id="projects">
+    <div class="projects-header">
+      <p class="section-label" data-reveal>Independent Work</p>
+      <h2 class="monument section-headline" data-reveal data-delay="1">SHIPPED.<br>LIVE.<br>REAL.</h2>
+      <p class="section-sub" data-reveal data-delay="2">
+        Beyond enterprise — self-directed products built, deployed, and used by real people.
+        Full-stack from idea to production.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Days Since Tracker -->
+      <div class="project-card" data-reveal>
+        <div class="project-num">01 / Android App</div>
+        <h3 class="monument project-name">DAYS SINCE TRACKER</h3>
+        <p class="project-desc">
+          Native Android app shipped to Google Play. <strong>300+ downloads</strong> since
+          February 2026 launch. Track elapsed time since any event with local persistence,
+          notifications, and Material 3 design.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">Dart</span>
+          <span class="stack-tag">Hive</span>
+          <span class="stack-tag">Material 3</span>
+          <span class="stack-tag">Google Play</span>
+        </div>
+        <div class="project-links">
+          <span class="project-badge"><span class="live-badge-dot"></span>Live on Play Store</span>
+          <a href="https://github.com/Rukhtam/days-since-tracker" target="_blank" class="project-link">GitHub →</a>
+          <a href="https://rukhtam.github.io/days-since-tracker/" target="_blank" class="project-link">Landing →</a>
+        </div>
+      </div>
+
+      <!-- QuestionForge -->
+      <div class="project-card" data-reveal data-delay="1">
+        <div class="project-num">02 / AI Web App</div>
+        <h3 class="monument project-name">QUESTIONFORGE</h3>
+        <p class="project-desc">
+          AI-powered exam question and worksheet generator for teachers.
+          Powered by the <strong>Anthropic Claude API</strong> — full-stack,
+          authenticated, and deployed on Vercel.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Next.js 14</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Claude API</span>
+          <span class="stack-tag">Prisma</span>
+          <span class="stack-tag">Supabase</span>
+          <span class="stack-tag">Vercel</span>
+        </div>
+        <div class="project-links">
+          <span class="project-badge"><span class="live-badge-dot"></span>Live on Vercel</span>
+          <a href="https://github.com/Rukhtam/questionforge-webapp" target="_blank" class="project-link">GitHub →</a>
+          <a href="https://questionforge-webapp.vercel.app/" target="_blank" class="project-link">Live App →</a>
+        </div>
+      </div>
+
+      <!-- MilkyWay -->
+      <div class="project-card" data-reveal data-delay="2">
+        <div class="project-num">03 / PWA</div>
+        <h3 class="monument project-name">MILKYWAY</h3>
+        <p class="project-desc">
+          Progressive Web App for tracking daily milk deliveries and household bills.
+          Offline-capable with Service Workers, WhatsApp bill-sharing,
+          and local notifications.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">React 18</span>
+          <span class="stack-tag">Tailwind CSS</span>
+          <span class="stack-tag">Service Workers</span>
+          <span class="stack-tag">PWA</span>
+          <span class="stack-tag">GitHub Pages</span>
+        </div>
+        <div class="project-links">
+          <span class="project-badge"><span class="live-badge-dot"></span>Live</span>
+          <a href="https://github.com/Rukhtam/milkyway" target="_blank" class="project-link">GitHub →</a>
+          <a href="https://rukhtam.github.io/milkyway/" target="_blank" class="project-link">Live App →</a>
+        </div>
+      </div>
+
+      <!-- Flatland -->
+      <div class="project-card" data-reveal data-delay="3">
+        <div class="project-num">04 / Game Dev</div>
+        <h3 class="monument project-name">FLATLAND:<br>EDGE OF PERCEPTION</h3>
+        <p class="project-desc">
+          A 2D puzzle-platformer game inspired by Edwin Abbott's <em>Flatland</em>.
+          Actively designing and prototyping — applying complex rendering logic,
+          collision systems, and narrative game design principles.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Game Design</span>
+          <span class="stack-tag">2D Rendering</span>
+          <span class="stack-tag">Puzzle Logic</span>
+          <span class="stack-tag">In Progress</span>
+        </div>
+        <div class="project-links">
+          <span class="project-badge">In Development</span>
+          <a href="https://github.com/Rukhtam/flatland-game" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section id="contact">
+    <div class="contact-glow"></div>
+    <div class="contact-inner">
+      <p class="contact-pre" data-reveal>// Available for new opportunities</p>
+      <h2 class="monument contact-headline" data-reveal data-delay="1">LET'S BUILD<br>SOMETHING.</h2>
+      <p class="contact-sub" data-reveal data-delay="2">
+        Looking for a Lead AI Engineer who architects systems, not just writes tests?
+        Let's talk about what you're building.
+      </p>
+
+      <div class="contact-actions" data-reveal data-delay="3">
+        <a href="mailto:Rukhtam.Amin@afiniti.com" class="btn-primary">Get In Touch</a>
+        <a href="https://rukhtam.github.io/rukhtam-amin-cv" target="_blank" class="btn-secondary">Download CV →</a>
+      </div>
+
+      <div class="contact-links" data-reveal data-delay="4">
+        <a href="mailto:Rukhtam.Amin@afiniti.com" class="contact-link">
+          <div class="contact-link-icon">@</div>
+          Rukhtam.Amin@afiniti.com
+        </a>
+        <a href="https://github.com/Rukhtam" target="_blank" class="contact-link">
+          <div class="contact-link-icon">&#9672;</div>
+          github.com/Rukhtam
+        </a>
+        <a href="https://linkedin.com/in/rukhtam-amin" target="_blank" class="contact-link">
+          <div class="contact-link-icon">in</div>
+          LinkedIn
+        </a>
+        <a href="https://rukhtam.github.io/rukhtam-amin-cv" target="_blank" class="contact-link">
+          <div class="contact-link-icon">↗</div>
+          View CV
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="footer-name">Rukhtam Amin · Lead AI Engineer</div>
+    <div class="footer-copy">© 2026 · Built with Hacker Energy</div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // ── Loader ─────────────────────────────────────────────────
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        loader.style.transition = 'opacity 0.6s ease';
+        loader.style.opacity = '0';
+        setTimeout(() => { loader.style.display = 'none'; initHero(); }, 600);
+      }, 1000);
+    });
+
+    // ── Hero animations (GSAP) ─────────────────────────────────
+    function initHero() {
+      if (typeof gsap !== 'undefined') {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        tl.to('#hero-pre',       { opacity: 1, y: 0, duration: 0.7, delay: 0.1 })
+          .to('#hero-name',      { opacity: 1, y: 0, duration: 0.9 }, '-=0.3')
+          .to('#hero-title',     { opacity: 1, y: 0, duration: 0.8 }, '-=0.5')
+          .to('#hero-divider',   { opacity: 1, scaleX: 1, duration: 0.5 }, '-=0.3')
+          .to('#hero-tagline',   { opacity: 1, y: 0, duration: 0.7 }, '-=0.3')
+          .to('#hero-stats',     { opacity: 1, y: 0, duration: 0.7 }, '-=0.3')
+          .to('#hero-actions',   { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
+          .to('#scroll-indicator', { opacity: 1, duration: 0.5 }, '-=0.2');
+
+        // Set initial GSAP states
+        gsap.set(['#hero-pre','#hero-name','#hero-title','#hero-divider',
+                  '#hero-tagline','#hero-stats','#hero-actions','#scroll-indicator'],
+                  { y: 20 });
+
+        // Hero counters once visible
+        setTimeout(startHeroCounters, 1800);
+      } else {
+        // Fallback: just show everything
+        ['hero-pre','hero-name','hero-title','hero-divider',
+         'hero-tagline','hero-stats','hero-actions','scroll-indicator'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+        });
+        startHeroCounters();
+      }
+    }
+
+    // ── Scroll Reveals (IntersectionObserver) ──────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+    // ── Counter animation ──────────────────────────────────────
+    function animateCounter(el, target, duration = 1500) {
+      const start = performance.now();
+      const update = (time) => {
+        const elapsed = Math.min((time - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - elapsed, 3); // ease out cubic
+        el.textContent = Math.round(eased * target);
+        if (elapsed < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(update);
+    }
+
+    function startHeroCounters() {
+      document.querySelectorAll('#hero-stats .counter').forEach(el => {
+        animateCounter(el, parseInt(el.dataset.target), 1400);
+      });
+    }
+
+    // Counters in minerva section
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.counter').forEach(el => {
+            animateCounter(el, parseInt(el.dataset.target), 1200);
+          });
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const minervaStats = document.querySelector('.minerva-stats');
+    if (minervaStats) counterObserver.observe(minervaStats);
+
+    // ── Nav scroll effect ──────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }, { passive: true });
+  </script>
+</body>
+</html>
