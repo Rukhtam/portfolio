@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,6 +108,7 @@
       text-decoration: none;
       text-transform: uppercase;
       transition: color 0.2s ease;
+      cursor: pointer;
     }
 
     .nav-links a:hover { color: var(--text); }
@@ -125,6 +126,7 @@
       border: none;
       border-radius: 0;
       transition: background 0.2s ease, color 0.2s ease;
+      cursor: pointer;
     }
 
     .nav-cta:hover { background: var(--muted); color: var(--bg); }
@@ -135,6 +137,7 @@
     #hero {
       position: relative;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -408,6 +411,7 @@
       border-radius: 0;
       transition: background 0.2s ease, color 0.2s ease;
       display: inline-block;
+      cursor: pointer;
     }
 
     .btn-primary:hover { background: var(--muted); }
@@ -426,6 +430,7 @@
       border-radius: 0;
       transition: border-color 0.2s ease, color 0.2s ease;
       display: inline-block;
+      cursor: pointer;
     }
 
     .btn-secondary:hover { border-color: var(--text); }
@@ -1282,6 +1287,8 @@
     @media (max-width: 900px) {
       #nav { padding: 16px 24px; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
 
       .hero-content { padding: 0 24px; padding-top: 100px; }
       .scroll-indicator { left: 24px; }
@@ -1346,6 +1353,185 @@
     @keyframes loadBar {
       to { left: 0; }
     }
+
+    /* ============================================================
+       MOBILE DRAWER + HAMBURGER
+       ============================================================ */
+    .nav-hamburger {
+      display: none;
+      background: transparent;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      align-items: stretch;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--text);
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+
+    .nav-hamburger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      height: 100dvh;
+      width: min(320px, 85vw);
+      background: rgba(13,13,20,0.98);
+      backdrop-filter: blur(8px);
+      border-left: 1px solid var(--border);
+      z-index: 1100;
+      padding: 96px 32px 32px;
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      visibility: hidden;
+    }
+    .mobile-drawer.open {
+      transform: translateX(0);
+      visibility: visible;
+    }
+
+    .mobile-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1050;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .mobile-drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-drawer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0;
+    }
+    .mobile-drawer-links a {
+      display: block;
+      padding: 14px 4px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 2.5px;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s ease;
+    }
+    .mobile-drawer-links a:hover,
+    .mobile-drawer-links a:focus-visible { color: var(--text); }
+
+    .mobile-drawer-cta {
+      align-self: flex-start;
+      margin-top: 16px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      padding: 14px 28px;
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    body.drawer-open { overflow: hidden; }
+
+    /* ============================================================
+       KEYBOARD FOCUS RINGS
+       ============================================================ */
+    a:focus-visible,
+    button:focus-visible,
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible,
+    .nav-cta:focus-visible,
+    .nav-logo:focus-visible,
+    .nav-hamburger:focus-visible,
+    .scroll-indicator:focus-visible,
+    .mobile-drawer-links a:focus-visible,
+    .mobile-drawer-cta:focus-visible {
+      outline: 2px solid #FFFFFF;
+      outline-offset: 3px;
+    }
+    a:focus:not(:focus-visible),
+    button:focus:not(:focus-visible) { outline: none; }
+
+    /* ============================================================
+       NO-JS / JS-FAILURE FALLBACK
+       If JS never removes the .no-js class, hero is still visible.
+       ============================================================ */
+    .no-js .hero-pre,
+    .no-js .hero-name,
+    .no-js .hero-title,
+    .no-js .hero-divider,
+    .no-js .hero-tagline,
+    .no-js .hero-stats,
+    .no-js .hero-actions,
+    .no-js .scroll-indicator { opacity: 1 !important; }
+    .no-js #loader { display: none !important; }
+
+    /* ============================================================
+       REDUCED-MOTION SUPPORT
+       Respect prefers-reduced-motion: reduce.
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .scroll-chevron,
+      .scroll-chevron-2,
+      .hero-scan,
+      .glow-orb,
+      .hero-orb-a,
+      .hero-orb-b,
+      .journey-orb-a,
+      .journey-orb-b,
+      [class*="orb-"],
+      .loader-bar::after,
+      #scanlines { animation: none !important; }
+
+      .hero-pre,
+      .hero-name,
+      .hero-title,
+      .hero-divider,
+      .hero-tagline,
+      .hero-stats,
+      .hero-actions,
+      .scroll-indicator { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -1362,7 +1548,7 @@
        NAVIGATION
        ============================================================ -->
   <nav id="nav">
-    <a href="#hero" class="nav-logo">RA</a>
+    <a href="#hero" class="nav-logo" aria-label="Rukhtam Amin — back to top">RA</a>
     <ul class="nav-links">
       <li><a href="#journey">Journey</a></li>
       <li><a href="#minerva">AI Work</a></li>
@@ -1370,7 +1556,21 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="https://rukhtam.github.io/rukhtam-amin-cv" target="_blank" class="nav-cta">View CV →</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-drawer-backdrop" id="mobile-drawer-backdrop"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true">
+    <ul class="mobile-drawer-links">
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#minerva">AI Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://rukhtam.github.io/rukhtam-amin-cv" target="_blank" class="mobile-drawer-cta">View CV →</a>
+  </aside>
 
   <!-- ============================================================
        HERO
@@ -1885,18 +2085,47 @@
        JAVASCRIPT
        ============================================================ -->
   <script>
+    // ── JS-alive flag — flip immediately so .no-js fallback never blocks reveal ──
+    document.documentElement.classList.remove('no-js');
+
+    // ── prefers-reduced-motion check ─────────────────────────────
+    const prefersReducedMotion =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ── Loader hard-timeout — guarantee dismissal even if `load` never fires ──
+    let _loaderHidden = false;
+    function hideLoader() {
+      if (_loaderHidden) return;
+      _loaderHidden = true;
+      const loader = document.getElementById('loader');
+      if (!loader) return;
+      loader.style.transition = 'opacity 0.6s ease';
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.display = 'none'; }, 600);
+    }
+    setTimeout(hideLoader, 3000);
+
     // ── Loader ─────────────────────────────────────────────────
     window.addEventListener('load', () => {
       setTimeout(() => {
-        const loader = document.getElementById('loader');
-        loader.style.transition = 'opacity 0.6s ease';
-        loader.style.opacity = '0';
-        setTimeout(() => { loader.style.display = 'none'; initHero(); }, 600);
-      }, 1000);
+        hideLoader();
+        initHero();
+      }, prefersReducedMotion ? 0 : 1000);
     });
 
     // ── Hero animations (GSAP) ─────────────────────────────────
     function initHero() {
+      // Reduced-motion: skip GSAP timeline, instant-reveal everything
+      if (prefersReducedMotion) {
+        ['hero-pre','hero-name','hero-title','hero-divider',
+         'hero-tagline','hero-stats','hero-actions','scroll-indicator'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+        });
+        startHeroCounters();
+        return;
+      }
+
       if (typeof gsap !== 'undefined') {
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
         tl.to('#hero-pre',       { opacity: 1, y: 0, duration: 0.7, delay: 0.1 })
@@ -2071,6 +2300,14 @@
         this._run = true;
         this.reset();
 
+        // Reduced-motion: jump directly to target, no flip animation
+        if (prefersReducedMotion) {
+          const finalStr = String(this.target).padStart(this.nDigits, '0');
+          finalStr.split('').forEach((ch, col) => this.digits[col].reset(parseInt(ch)));
+          this._run = false;
+          return;
+        }
+
         const FLIP    = 85;   // ms per phase — snappy mechanical feel
         const GAP     = 8;    // ms breath between successive flips on same digit
         const STAGGER = 40;   // ms column cascade (left→right)
@@ -2137,6 +2374,7 @@
 
     // ── CRT scanlines overlay (injected via JS for clean separation) ──
     (function initScanlines() {
+      if (prefersReducedMotion) return;
       const el = document.createElement('div');
       el.id = 'scanlines';
       el.setAttribute('aria-hidden', 'true');
@@ -2151,6 +2389,40 @@
       const style = document.createElement('style');
       style.textContent = '@keyframes scanScroll{from{background-position:0 0}to{background-position:0 200px}}';
       document.head.appendChild(style);
+    })();
+
+    // ── Mobile drawer toggle ───────────────────────────────────
+    (function initMobileDrawer() {
+      const btn = document.getElementById('nav-hamburger');
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('mobile-drawer-backdrop');
+      if (!btn || !drawer || !backdrop) return;
+
+      const openDrawer = () => {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        drawer.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('drawer-open');
+      };
+      const closeDrawer = () => {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('drawer-open');
+      };
+      const isOpen = () => drawer.classList.contains('open');
+
+      btn.addEventListener('click', () => (isOpen() ? closeDrawer() : openDrawer()));
+      backdrop.addEventListener('click', closeDrawer);
+      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen()) closeDrawer(); });
+
+      // Close drawer if viewport grows past mobile breakpoint
+      window.matchMedia('(min-width: 901px)').addEventListener('change', e => {
+        if (e.matches && isOpen()) closeDrawer();
+      });
     })();
   </script>
 </body>
